@@ -5,15 +5,17 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const pathsToClean = [
-  'dist'
+  'dist/*'
 ];
 
-const cleanOptions = {};
+const cleanOptions = {
+  exclude:  ['.getkeep'],
+};
 
 module.exports = {
   mode: 'production',
   optimization: {
-    minimize: false,
+    minimize: NODE_ENV === 'production',
   },
   entry: {
     app: ['./src/electron-renderer/index.jsx']
