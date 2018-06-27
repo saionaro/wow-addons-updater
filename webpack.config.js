@@ -9,7 +9,7 @@ const pathsToClean = [
 ];
 
 const cleanOptions = {
-  exclude:  ['.getkeep'],
+  exclude:  ['.gitkeep'],
 };
 
 module.exports = {
