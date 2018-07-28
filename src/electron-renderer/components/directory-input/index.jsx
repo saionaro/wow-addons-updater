@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-export default class App extends PureComponent {
+import Button from '../button/index.jsx';
+import './style.less';
+
+export default class DirectoryInput extends PureComponent {
   static propTypes = {
     chooseDirectory: PropTypes.func.isRequired,
   };
@@ -9,12 +12,11 @@ export default class App extends PureComponent {
   render() {
     return (
       <div className="au-directory-input">
-        <button
-          className="au-directory-input__choose"
+        <Button
+          caption="Choose Directory"
+          className="au-directory-input__choose-button"
           onClick={this.props.chooseDirectory}
-        >
-          Choose Directory
-        </button>
+        />
       </div>
     );
   }

@@ -1,3 +1,13 @@
+.au-addons-table__body {
+  margin-left: 30px;
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  background-image: linear-gradient(#6495ED, #8A2BE2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .au-addons-table__addon--failed {
   color: red;
 }
@@ -8,4 +18,27 @@
 
 .au-addons-table__addon--fetching {
   color: blue;
+}
+
+.au-addons-table__update-button {
+  margin-top: 20px;
+  color: #FFF0F5;
+  background-image: linear-gradient(#D8BFD8 0%, #8A2BE2 75%, #4B0082 100%);
+  box-shadow: 
+    inset 0 0 0 1px rgba(0, 0, 0, 0.2),
+    0 1px 3px #470047;
+}
+
+.au-addons-table__update-button:hover {
+  box-shadow: 
+    inset 0 0 0 1px rgba(0, 0, 0, 0.2),
+    inset 0 1px 3px #470047;
+  opacity: 0.9;
+}
+
+.au-addons-table__update-button:active {
+  box-shadow: 
+    inset 0 0 0 1px rgba(0, 0, 0, 0.2),
+    inset 0 1px 3px #470047;
+  opacity: 0.7;
 }
