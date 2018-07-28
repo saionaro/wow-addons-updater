@@ -1,4 +1,5 @@
 # Wow Addons Updater
+[![Build Status](https://www.travis-ci.com/Saionaro/wow-addons-updater.svg?branch=master)](https://travis-ci.org/Saionaro/wow-addons-updater)
 
 To build this app in the development mode follow next steps:   
 
