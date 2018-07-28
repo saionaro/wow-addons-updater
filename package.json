@@ -12,7 +12,7 @@
     "lint": "yarn run lint:js && yarn run lint:css",
     "lint:js": "eslint ./src",
     "lint:css": "stylelint ./src",
-    "test": "yarn run lint:js && lint:css"
+    "test": "yarn run lint:js && yarn run lint:css"
   },
   "author": "Saionaro",
   "license": "MIT",
