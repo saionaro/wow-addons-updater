@@ -54,6 +54,9 @@ function getAddonsList(instance, event, path) {
             if (/^WeakAuras/.test(name)) {
               name = 'WeakAuras 2';
             }
+            if (/^Details/.test(name)) {
+              name = 'Details';
+            }
 
             name = normalizeName(name);
             addons[name] = true;
