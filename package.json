@@ -7,7 +7,7 @@
     "start": "yarn run lint && yarn run build-dev && yarn run launch",
     "launch": "cross-env NODE_ENV=development electron .",
     "build-package": "yarn run build && electron-packager . --out=builds --overwrite",
-    "build-dev": "cross-env NODE_ENV=development webpack",
+    "build-dev": "cross-env NODE_ENV=development webpack --watch",
     "build": "cross-env NODE_ENV=production webpack",
     "lint": "yarn run lint:js && yarn run lint:css",
     "lint:js": "eslint ./src",

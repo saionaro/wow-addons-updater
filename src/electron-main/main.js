@@ -1,8 +1,11 @@
 const {
   app,
   BrowserWindow,
-  ipcMain
+  ipcMain,
+  globalShortcut,
 } = require('electron');
+
+const DEV = process.env.NODE_ENV === 'development';
 
 const gatherAddonsWrapper = require('./actions/addons-gatherer.js');
 const downloadAddonWrapper = require('./actions/addon-loader.js');
@@ -28,12 +31,13 @@ app.on('window-all-closed', function() {
 app.on('ready', () => {
   inst.window = createWindow(800, 600);
   inst.window.loadFile('./dist/index.html');
-  if (process.env.NODE_ENV === 'development') {
+  if (DEV) {
     inst.window.webContents.openDevTools();
+    globalShortcut.register('f5', function() {
+      inst.window.reload();
+    });
   }
   inst.tempPath = app.getPath('temp');
-
-  // console.log(app.getPath('userData'));
   ipcMain.on('action/get-addons', gatherAddonsWrapper(inst));
   ipcMain.on('action/get-addon-data', downloadAddonWrapper(inst));
   ipcMain.on('action/choose-directory', chooseDirectoryWrapper(inst));
