@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
+import Button from '../button/index.jsx';
 import './style.less';
 
 export default class AddonsTable extends PureComponent {
@@ -40,6 +41,7 @@ export default class AddonsTable extends PureComponent {
               key={addon.id}
               onClick={() => { !updateProcess && updateAddon(addon.name) }}
             >
+              <span className="au-addons-table__icon"></span>
               {addon.name}
             </div>
           );
@@ -75,13 +77,12 @@ export default class AddonsTable extends PureComponent {
             </div>
             {failedRead ? this._renderReadError() : this._renderBody()}
             {!!list.length && (
-              <button
+              <Button
                 disabled={updateProcess}
-                className="au-addons-table__update-all"
+                className="au-addons-table__update-button"
+                caption="Update All"
                 onClick={this.props.updateAll}
-              >
-                Update All
-              </button>
+              />
             )}
           </div>
         </div>
