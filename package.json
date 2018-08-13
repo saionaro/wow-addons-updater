@@ -11,8 +11,7 @@
     "build": "cross-env NODE_ENV=production webpack",
     "lint": "yarn run lint:js && yarn run lint:css",
     "lint:js": "eslint ./src",
-    "lint:css": "stylelint ./src",
-    "test": "yarn run lint:js && yarn run lint:css"
+    "lint:css": "stylelint ./src"
   },
   "author": "Saionaro",
   "license": "MIT",
