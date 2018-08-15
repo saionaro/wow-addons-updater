@@ -38,7 +38,7 @@
     "less": "^3.8.0",
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.4.1",
-    "postcss-jsx": "^0.32.0",
+    "postcss-jsx": "^0.33.0",
     "postcss-loader": "^3.0.0",
     "postcss-syntax": "^0.33.0",
     "prop-types": "^15.6.2",
