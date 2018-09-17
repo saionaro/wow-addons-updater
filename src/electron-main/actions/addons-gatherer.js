@@ -51,11 +51,20 @@ function getAddonsList(instance, event, path) {
             ) {
               name = 'Deadly Boss Mods';
             }
-            if (/^WeakAuras/.test(name)) {
+            if (/^weakauras/i.test(name)) {
               name = 'WeakAuras 2';
             }
-            if (/^Details/.test(name)) {
+            if (/^details/i.test(name)) {
               name = 'Details';
+            }
+            if (/raider\.io/i.test(name)) {
+              name = 'RaiderIO';
+            }
+            if (/vuhdo/i.test(name)) {
+              name = 'Vuhdo';
+            }
+            if (/o item level/i.test(name)) {
+              name = 'O Item Level';
             }
 
             name = normalizeName(name);
