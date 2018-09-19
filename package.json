@@ -41,8 +41,8 @@
     "postcss-loader": "3.0.0",
     "postcss-syntax": "0.33.0",
     "prop-types": "15.6.2",
-    "react": "16.5.1",
-    "react-dom": "16.5.1",
+    "react": "16.5.2",
+    "react-dom": "16.5.2",
     "react-redux": "5.0.7",
     "redux": "4.0.0",
     "redux-logger": "3.0.6",
@@ -50,7 +50,7 @@
     "stylelint": "9.4.0",
     "stylelint-config-recommended": "2.1.0",
     "svg-url-loader": "2.3.2",
-    "webpack": "4.18.1",
+    "webpack": "4.19.1",
     "webpack-cli": "3.1.0"
   },
   "dependencies": {
