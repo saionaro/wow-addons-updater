@@ -2040,21 +2040,7 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-electron-download@^3.0.1:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/electron-download/-/electron-download-3.3.0.tgz#2cfd54d6966c019c4d49ad65fbe65cc9cdef68c8"
-  dependencies:
-    debug "^2.2.0"
-    fs-extra "^0.30.0"
-    home-path "^1.0.1"
-    minimist "^1.2.0"
-    nugget "^2.0.0"
-    path-exists "^2.1.0"
-    rc "^1.1.2"
-    semver "^5.3.0"
-    sumchecker "^1.2.0"
-
-electron-download@^4.1.1:
+electron-download@^4.1.0, electron-download@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/electron-download/-/electron-download-4.1.1.tgz#02e69556705cc456e520f9e035556ed5a015ebe8"
   dependencies:
@@ -2109,12 +2095,12 @@ electron-to-chromium@^1.3.61:
   version "1.3.62"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.62.tgz#2e8e2dc070c800ec8ce23ff9dfcceb585d6f9ed8"
 
-electron@2.0.9:
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-2.0.9.tgz#dfc863d653fa3a2dd4fea0c63303df9c0e33c602"
+electron@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-3.0.0.tgz#d41e671b1057aee12021c63a5db242075d6dc685"
   dependencies:
     "@types/node" "^8.0.24"
-    electron-download "^3.0.1"
+    electron-download "^4.1.0"
     extract-zip "^1.0.3"
 
 elliptic@^6.0.0:
@@ -2209,10 +2195,6 @@ es6-iterator@~2.0.3:
     es5-ext "^0.10.35"
     es6-symbol "^3.1.1"
 
-es6-promise@^4.0.5:
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.2.4.tgz#dc4221c2b16518760bd8c39a52d8f356fc00ed29"
-
 es6-symbol@^3.1.1, es6-symbol@~3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/es6-symbol/-/es6-symbol-3.1.1.tgz#bf00ef4fdab6ba1b46ecb7b629b4c7ed5715cc77"
@@ -2231,9 +2213,9 @@ eslint-import-resolver-node@^0.3.1:
     debug "^2.6.9"
     resolve "^1.5.0"
 
-eslint-loader@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-loader/-/eslint-loader-2.1.0.tgz#61334c548aeb0b8e20ec3a552fb7a88c47261c6a"
+eslint-loader@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/eslint-loader/-/eslint-loader-2.1.1.tgz#2a9251523652430bfdd643efdb0afc1a2a89546a"
   dependencies:
     loader-fs-cache "^1.0.0"
     loader-utils "^1.0.2"
@@ -2678,16 +2660,6 @@ fs-extra@0.26.7:
     path-is-absolute "^1.0.0"
     rimraf "^2.2.8"
 
-fs-extra@^0.30.0:
-  version "0.30.0"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-0.30.0.tgz#f233ffcc08d4da7d432daa449776989db1df93f0"
-  dependencies:
-    graceful-fs "^4.1.2"
-    jsonfile "^2.1.0"
-    klaw "^1.0.0"
-    path-is-absolute "^1.0.0"
-    rimraf "^2.2.8"
-
 fs-extra@^4.0.0, fs-extra@^4.0.1:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-4.0.3.tgz#0d852122e5bc5beb453fb028e9c0c9bf36340c94"
@@ -3001,10 +2973,6 @@ hmac-drbg@^1.0.0:
 hoist-non-react-statics@^2.5.0:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
-
-home-path@^1.0.1:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/home-path/-/home-path-1.0.6.tgz#d549dc2465388a7f8667242c5b31588d29af29fc"
 
 hosted-git-info@^2.1.4:
   version "2.6.1"
@@ -4212,7 +4180,7 @@ npmlog@^4.0.2:
     gauge "~2.7.3"
     set-blocking "~2.0.0"
 
-nugget@^2.0.0, nugget@^2.0.1:
+nugget@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/nugget/-/nugget-2.0.1.tgz#201095a487e1ad36081b3432fa3cada4f8d071b0"
   dependencies:
@@ -4462,7 +4430,7 @@ path-dirname@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/path-dirname/-/path-dirname-1.0.2.tgz#cc33d24d525e099a5388c0336c6e32b9160609e0"
 
-path-exists@^2.0.0, path-exists@^2.1.0:
+path-exists@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/path-exists/-/path-exists-2.1.0.tgz#0feb6c64f0fc518d9a754dd5efb62c7022761f4b"
   dependencies:
@@ -4886,7 +4854,7 @@ randomfill@^1.0.3:
     randombytes "^2.0.5"
     safe-buffer "^5.1.0"
 
-rc@^1.1.2, rc@^1.2.1, rc@^1.2.7:
+rc@^1.2.1, rc@^1.2.7:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/rc/-/rc-1.2.8.tgz#cd924bf5200a075b83c188cd6b9e211b7fc0d3ed"
   dependencies:
@@ -4899,14 +4867,14 @@ rcedit@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/rcedit/-/rcedit-1.1.0.tgz#ae21c28d4efdd78e95fcab7309a5dd084920b16a"
 
-react-dom@16.5.1:
-  version "16.5.1"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.5.1.tgz#29d0c5a01ed3b6b4c14309aa91af6ec4eb4f292c"
+react-dom@16.5.2:
+  version "16.5.2"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.5.2.tgz#b69ee47aa20bab5327b2b9d7c1fe2a30f2cfa9d7"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    schedule "^0.4.0"
+    schedule "^0.5.0"
 
 react-redux@5.0.7:
   version "5.0.7"
@@ -4919,14 +4887,14 @@ react-redux@5.0.7:
     loose-envify "^1.1.0"
     prop-types "^15.6.0"
 
-react@16.5.1:
-  version "16.5.1"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.5.1.tgz#8cb8e9f8cdcb4bde41c9a138bfbf907e66132372"
+react@16.5.2:
+  version "16.5.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.5.2.tgz#19f6b444ed139baa45609eee6dc3d318b3895d42"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    schedule "^0.4.0"
+    schedule "^0.5.0"
 
 read-pkg-up@^1.0.1:
   version "1.0.1"
@@ -5325,9 +5293,9 @@ sax@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-schedule@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.4.0.tgz#fa20cfd0bfbf91c47d02272fd7096780d3170bbb"
+schedule@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.5.0.tgz#c128fffa0b402488b08b55ae74bb9df55cc29cc8"
   dependencies:
     object-assign "^4.1.1"
 
@@ -5724,13 +5692,6 @@ sugarss@^1.0.0:
   resolved "https://registry.yarnpkg.com/sugarss/-/sugarss-1.0.1.tgz#be826d9003e0f247735f92365dc3fd7f1bae9e44"
   dependencies:
     postcss "^6.0.14"
-
-sumchecker@^1.2.0:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/sumchecker/-/sumchecker-1.3.1.tgz#79bb3b4456dd04f18ebdbc0d703a1d1daec5105d"
-  dependencies:
-    debug "^2.2.0"
-    es6-promise "^4.0.5"
 
 sumchecker@^2.0.2:
   version "2.0.2"
@@ -6226,9 +6187,9 @@ webpack-sources@^1.2.0:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
-webpack@4.18.1:
-  version "4.18.1"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.18.1.tgz#029042c815443fce23424de1548d9317cfca148a"
+webpack@4.19.1:
+  version "4.19.1"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.19.1.tgz#096674bc3b573f8756c762754366e5b333d6576f"
   dependencies:
     "@webassemblyjs/ast" "1.7.6"
     "@webassemblyjs/helper-module-context" "1.7.6"
