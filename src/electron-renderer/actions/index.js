@@ -13,7 +13,7 @@ import updateAddonHelper from '../helpers/update-addon.js';
 import chooseDirectoryHelper from '../helpers/directory-chooser.js';
 
 const getSetDirectoryAction = path =>
-  ({ type: SET_ADDONS_DIRECTORY, path });
+  ({ type: SET_ADDONS_DIRECTORY, payload: { path } });
 
 export function setAddonsDirectory(path) {
   return dispatch => {
@@ -28,11 +28,11 @@ export function setAddonsDirectory(path) {
 }
 
 export function setAddonsList(list) {
-  return { type: SET_ADDONS_LIST, list };
+  return { type: SET_ADDONS_LIST, payload: { list } };
 }
 
 export function setFetchState(id, state) {
-  return { type: SET_FETCH_STATE, id, state };
+  return { type: SET_FETCH_STATE, payload: { id, state } };
 }
 
 const updateCallback = (id, result, dispatch) => {
@@ -60,27 +60,15 @@ export function updateAddon(id) {
 }
 
 export function setFailed(id, state) {
-  return { type: SET_FAILED, id, state };
+  return { type: SET_FAILED, payload: { id, state } };
 }
 
 export function setUpdated(id, state) {
-  return { type: SET_UPDATED, id, state };
+  return { type: SET_UPDATED, payload: { id, state } };
 }
 
 export function setFailedReadAddonsState(state) {
-  return { type: SET_FAILED_READ_ADDONS_STATE, state }
-}
-
-function chainPromises(array = []) {
-  return new Promise((resolve, reject) => {
-    let current = -1;
-    (function callback() {
-      if (++current === array.length) {
-        return resolve();
-      }
-      return array[current]().then(callback).catch(reject);
-    }());
-  });
+  return { type: SET_FAILED_READ_ADDONS_STATE, payload: { state } }
 }
 
 export function updateAll() {
@@ -89,8 +77,10 @@ export function updateAll() {
       list,
       directory,
     }} = getState();
-    chainPromises(list.map(addon => () =>
-      updateAddonInner(addon.id, directory, dispatch)))
+    Promise.all(
+      list.map(addon =>
+        updateAddonInner(addon.id, directory, dispatch)
+      ))
       .then(() =>
         new Notification(`WOW Addons Updater`, {
           body: `All Addons Updated.`
@@ -99,7 +89,7 @@ export function updateAll() {
 }
 
 export function setUpdateProcess(state) {
-  return { type: SET_UPDATE_PROCESS, state };
+  return { type: SET_UPDATE_PROCESS, payload: { state } };
 }
 
 export function chooseDirectory() {

@@ -12,11 +12,13 @@ const normalizeName = name =>
     .replace(/-v1.*$/, '')
     .replace(/\n/, '');
 
-function getAddonsList(instance, event, path) {
+function getAddonsList(instance, event, data) {
+  const { path, uuid } = data;
   const addons = {};
   fs.readdir(path, (err, folders) => {
     if (err) {
       instance.window.webContents.send('answer/get-addons', {
+        uuid,
         fail: true,
         error: err
       });
@@ -28,6 +30,7 @@ function getAddonsList(instance, event, path) {
       current++;
       if (current === foldersCount) {
         instance.window.webContents.send('answer/get-addons', {
+          uuid,
           fail: false,
           data: Object.keys(addons).map(transform)
         });
