@@ -1,4 +1,5 @@
 /node_modules
+/tmp
 /builds
 /dist/*.js
 /dist/*.css

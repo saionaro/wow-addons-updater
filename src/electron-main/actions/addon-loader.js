@@ -35,7 +35,6 @@ const downloadFile = (title, url, tempPath) => {
     request(url)
       .pipe(fs.createWriteStream(zipPath))
       .on('finish', () => {
-        log('Downloaded!');
         res(zipPath);
       });
   });
@@ -60,6 +59,7 @@ function updateAddon(instance, event, data) {
   const {
     title,
     addonsDirectory,
+    uuid,
   } = data;
   log('Get data for ' + title);
   getZipUrl(`https://wow.curseforge.com/projects/${title}/files/latest`)
@@ -76,6 +76,7 @@ function updateAddon(instance, event, data) {
     .then(() => {
       log('Done');
       instance.window.webContents.send('answer/get-addon-data', {
+        uuid,
         fail: false,
         data: {}
       });
@@ -83,6 +84,7 @@ function updateAddon(instance, event, data) {
     .catch(err => {
       log('Caused error', err);
       instance.window.webContents.send('answer/get-addon-data', {
+        uuid,
         fail: true,
         error: err
       });

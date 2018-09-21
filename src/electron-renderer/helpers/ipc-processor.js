@@ -1,20 +1,38 @@
+import nanoid from 'nanoid';
 const { ipcRenderer } = window.require('electron');
 
+const subscribes = {};
+const promises = {};
+
+const wrapper = (event, answer) => {
+  if (answer.fail) {
+    promises[answer.uuid].rej(answer.error);
+  } else {
+    promises[answer.uuid].res(answer.data);
+  }
+  delete promises[answer.uuid];
+};
+
+const callbackGatherer = (store, uuid) => (res, rej) =>
+  (store[uuid] = { res, rej });
+
 export function executeAction(action, payload, needAnswer) {
-  return new Promise((res, rej) => {
-    ipcRenderer.send(`action/${action}`, payload);
-    if (needAnswer) {
-      const channel = `answer/${action}`;
-      const callback = (event, answ) => {
-        ipcRenderer.removeListener(channel, callback);
-        if (answ.fail) {
-          return rej(answ.error)
-        }
-        res(answ.data);
-      };
-      ipcRenderer.on(`answer/${action}`, callback);
-    } else {
-      res();
-    }
+  const uuid = nanoid();
+
+  ipcRenderer.send(`action/${action}`, {
+    ...payload,
+    uuid,
   });
+
+  if (needAnswer) {
+    const channel = `answer/${action}`;
+
+    if (!subscribes[channel]) {
+      subscribes[channel] = true;
+      ipcRenderer.on(channel, wrapper);
+    }
+
+    return new Promise(callbackGatherer(promises, uuid));
+  }
+  return Promise.resolve();
 }
