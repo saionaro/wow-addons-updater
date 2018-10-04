@@ -2015,9 +2015,9 @@ electron-osx-sign@^0.4.1:
     minimist "^1.2.0"
     plist "^2.1.0"
 
-electron-packager@12.1.2:
-  version "12.1.2"
-  resolved "https://registry.yarnpkg.com/electron-packager/-/electron-packager-12.1.2.tgz#731fbbff432c94e4c768c5270db558644329d0dc"
+electron-packager@12.2.0:
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/electron-packager/-/electron-packager-12.2.0.tgz#e38e0702a12e5f62a00a03aabd0b9ad28aebab4b"
   dependencies:
     asar "^0.14.0"
     debug "^3.0.0"
