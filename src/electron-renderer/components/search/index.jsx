@@ -35,6 +35,7 @@ export default class Search extends PureComponent {
       const key = event._targetInst.key;
       const item = cache[key];
       onClickResult(item);
+      this.setState({ query: '' });
     }
   }
 
@@ -76,6 +77,7 @@ export default class Search extends PureComponent {
         <div className="au-search__relative-wrapper">
           <input
             type="text"
+            placeholder="Search addon..."
             value={this.state.query}
             name="query"
             onChange={this.handleChange}

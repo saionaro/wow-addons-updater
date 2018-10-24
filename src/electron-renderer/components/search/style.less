@@ -11,10 +11,16 @@
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 1;
+  max-width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .au-search__dropdown-item {
   margin-top: 8px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
 
   &:hover {
     cursor: pointer;
