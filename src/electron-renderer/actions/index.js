@@ -5,12 +5,16 @@ import {
   SET_FAILED,
   SET_UPDATED,
   SET_FAILED_READ_ADDONS_STATE,
+  SET_SEARCH,
+  SET_SEARCH_RESULT,
   SET_UPDATE_PROCESS,
 } from '../actionTypes';
 
 import readAddons from '../helpers/read-addons.js';
+import searchAddonHelper from '../helpers/search-addon.js';
 import updateAddonHelper from '../helpers/update-addon.js';
 import chooseDirectoryHelper from '../helpers/directory-chooser.js';
+import debounce from '../helpers/debounce.js';
 
 const getSetDirectoryAction = path =>
   ({ type: SET_ADDONS_DIRECTORY, payload: { path } });
@@ -99,5 +103,20 @@ export function chooseDirectory() {
         dispatch(setAddonsDirectory(res));
       })
       .catch(() => {});
+  };
+}
+
+const searchDebounced = debounce(function(dispatch, query) {
+  dispatch({ type: SET_SEARCH });
+  searchAddonHelper(query).then(res => {
+    dispatch({ type: SET_SEARCH_RESULT, payload: res });
+  }).catch(err => {
+    console.log(err);
+  });
+}, 1000);
+
+export function searchAddon(query) {
+  return dispatch => {
+    searchDebounced(dispatch, query);
   };
 }

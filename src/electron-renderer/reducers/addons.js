@@ -5,11 +5,16 @@ import {
   SET_FAILED,
   SET_UPDATED,
   SET_FAILED_READ_ADDONS_STATE,
+  SET_SEARCH,
+  SET_SEARCH_RESULT,
   SET_UPDATE_PROCESS,
 } from '../actionTypes';
 
 const initial = {
   list: [],
+  searchCache: {},
+  searchPending: false,
+  searchList: [],
   directory: '',
   fetching: {},
   failed: {},
@@ -75,6 +80,22 @@ export default function(state = initial, action) {
     return {
       ...state,
       updateProcess: action.payload.state,
+    };
+
+  case SET_SEARCH:
+    return {
+      ...state,
+      searchPending: true,
+    };
+  case SET_SEARCH_RESULT:
+    return {
+      ...state,
+      searchCache: {
+        ...state.searchCache,
+        ...action.payload.fullData,
+      },
+      searchList: action.payload.list,
+      searchPending: false,
     };
 
   default:
