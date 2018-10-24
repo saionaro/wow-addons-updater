@@ -39,10 +39,10 @@ export default class AddonsTable extends PureComponent {
                 updated[addon.id] && 'au-addons-table__addon--updated'
               )}
               key={addon.id}
-              onClick={() => { !updateProcess && updateAddon(addon.name) }}
+              onClick={() => { !updateProcess && updateAddon(addon) }}
             >
               <span className="au-addons-table__icon"></span>
-              {addon.name}
+              {addon.title}
             </div>
           );
         })}

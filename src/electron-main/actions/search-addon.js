@@ -44,9 +44,13 @@ function searchAddon(instance, event, data) {
       const href = `${baseUrl}${$item('.list-item__details a').attr('href')}`;
       md5sum.update(`${title}${href}`);
       const hash = md5sum.digest('hex');
+      const url = `${baseUrl}${$item('.list-item__details a').attr('href')}`;
+      const addonToken = url.split('/').pop();
       fullData[hash] = {
         title: clearTitle($item('.list-item__title').text()),
-        href: `${baseUrl}${$item('.list-item__details a').attr('href')}`,
+        addonToken,
+        href: url,
+        archiveUrl: `https://wow.curseforge.com/projects/${addonToken}/files/latest`,
       };
       return hash;
     });

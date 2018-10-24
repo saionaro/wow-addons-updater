@@ -10,12 +10,13 @@ export default class DirectoryInput extends PureComponent {
   };
 
   render() {
+    const { chooseDirectory } = this.props;
     return (
       <div className="au-directory-input">
         <Button
           caption="Choose Directory"
           className="au-directory-input__choose-button"
-          onClick={this.props.chooseDirectory}
+          onClick={chooseDirectory}
         />
       </div>
     );

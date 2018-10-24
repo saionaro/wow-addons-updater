@@ -1,14 +1,17 @@
 import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import Button from '../button/index.jsx';
+import './style.less';
 
 export default class Search extends PureComponent {
   static propTypes = {
-    searchCache: PropTypes.shape(),
-    searchList: PropTypes.arrayOf(PropTypes.string),
-    searchPending: PropTypes.bool.isRequired,
+    data: PropTypes.shape({
+      cache: PropTypes.shape(),
+      list: PropTypes.arrayOf(PropTypes.string),
+      pending: PropTypes.bool.isRequired,
+    }),
     searchAddon: PropTypes.func.isRequired,
+    onClickResult: PropTypes.func,
   };
 
   constructor(props) {
@@ -23,6 +26,16 @@ export default class Search extends PureComponent {
     this.setState({
       query: event.target.value
     }, this.runSearch);
+  }
+
+  handleItemClick = (event) => {
+    const { onClickResult } = this.props;
+    if (onClickResult) {
+      const { data: { cache } } = this.props;
+      const key = event._targetInst.key;
+      const item = cache[key];
+      onClickResult(item);
+    }
   }
 
   runSearch = () => {
@@ -51,33 +64,40 @@ export default class Search extends PureComponent {
   }
 
   render() {
-    const { searchCache, searchList, searchPending } = this.props;
+    const {
+      data: {
+        cache,
+        list,
+        pending,
+      },
+    } = this.props;
     return (
       <div className="au-search">
-        <input
-          type="text"
-          value={this.state.query}
-          name="query"
-          onChange={this.handleChange}
-        />
-        <Button
-          caption="Find!"
-          className="au-search__choose-button"
-          onClick={this.runSearch}
-        />
-        {searchPending && (
+        <div className="au-search__relative-wrapper">
+          <input
+            type="text"
+            value={this.state.query}
+            name="query"
+            onChange={this.handleChange}
+          />
+          {!!list.length && (
+            <ul className="au-search__dropdown">
+              {list.map(hash => {
+                return (
+                  <li
+                    key={hash}
+                    className="au-search__dropdown-item"
+                    onClick={this.handleItemClick}
+                  >
+                    {this.wrapSearch(cache[hash].title)}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
+        {pending && (
           <p>Search is pending...</p>
-        )}
-        {searchList && (
-          <ul>
-            {searchList.map(hash => {
-              return (
-                <li key={hash}>
-                  {this.wrapSearch(searchCache[hash].title)}
-                </li>
-              );
-            })}
-          </ul>
         )}
       </div>
     );

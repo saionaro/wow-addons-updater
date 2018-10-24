@@ -1,8 +1,8 @@
 import { executeAction } from './ipc-processor.js';
 
-export default function(title, addonsDirectory) {
+export default function(addonData, addonsDirectory) {
   return executeAction('get-addon-data', {
-    title,
+    addonData,
     addonsDirectory
   }, true);
 }
