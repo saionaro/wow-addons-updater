@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const transform = addonTitle => ({
   id: addonTitle,
-  name: addonTitle,
+  title: addonTitle,
 });
 
 const normalizeName = name =>
@@ -11,6 +11,14 @@ const normalizeName = name =>
     .replace(/\r/, '')
     .replace(/-v1.*$/, '')
     .replace(/\n/, '');
+
+const sorterer = (fst, scd) => {
+  const item1 = fst.toLowerCase();
+  const item2 = scd.toLowerCase();
+  if (item1 < item2) return -1;
+  if (item1 > item2) return 1;
+  return 0;
+}
 
 function getAddonsList(instance, event, data) {
   const { path, uuid } = data;
@@ -32,7 +40,7 @@ function getAddonsList(instance, event, data) {
         instance.window.webContents.send('answer/get-addons', {
           uuid,
           fail: false,
-          data: Object.keys(addons).map(transform)
+          data: Object.keys(addons).sort(sorterer).map(transform),
         });
       }
     };
@@ -42,10 +50,14 @@ function getAddonsList(instance, event, data) {
           const tocFile = files.find((file) => /toc$/.test(file));
           fs.readFile(`${path}/${folder}/${tocFile}`, 'utf8', (error, data) => {
             if (error) {
+              check();
               return error;
             }
             const arr = data.split('\n');
             let name = arr.find((elem) => /^## Title:/i.test(elem));
+            if (!name) {
+              return check();
+            }
             name = name.replace(/## Title: ?/, '');
 
             if (

@@ -55,17 +55,27 @@ const getZipUrl = url =>
     });
   });
 
-function updateAddon(instance, event, data) {
+const buildCurseUrl = title =>
+  `https://wow.curseforge.com/projects/${title}/files/latest`;
+
+const buildAceUrl = title =>
+  `https://www.wowace.com/projects/${title}/files/latest`;
+
+function loadAddon(instance, event, data) {
   const {
-    title,
+    addonData: {
+      title,
+      archiveUrl,
+      addonToken,
+    },
     addonsDirectory,
     uuid,
   } = data;
   log('Get data for ' + title);
-  getZipUrl(`https://wow.curseforge.com/projects/${title}/files/latest`)
+  getZipUrl(archiveUrl || buildCurseUrl(addonToken || title))
     .catch(() => {
       log('Second try');
-      return getZipUrl(`https://www.wowace.com/projects/${title}/files/latest`);
+      return getZipUrl(buildAceUrl(addonToken || title));
     })
     .then(url => {
       return downloadFile(title, url, instance.tempPath);
@@ -92,5 +102,5 @@ function updateAddon(instance, event, data) {
 }
 
 module.exports = function(instance) {
-  return updateAddon.bind(null, instance);
+  return loadAddon.bind(null, instance);
 };

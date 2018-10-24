@@ -10,6 +10,7 @@ const DEV = process.env.NODE_ENV === 'development';
 const gatherAddonsWrapper = require('./actions/addons-gatherer.js');
 const downloadAddonWrapper = require('./actions/addon-loader.js');
 const chooseDirectoryWrapper = require('./actions/directory-chooser.js');
+const searchAddonWrapper = require('./actions/search-addon.js');
 
 const inst = {
   window: null,
@@ -41,4 +42,5 @@ app.on('ready', () => {
   ipcMain.on('action/get-addons', gatherAddonsWrapper(inst));
   ipcMain.on('action/get-addon-data', downloadAddonWrapper(inst));
   ipcMain.on('action/choose-directory', chooseDirectoryWrapper(inst));
+  ipcMain.on('action/search-addon', searchAddonWrapper(inst));
 });

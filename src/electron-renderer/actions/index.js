@@ -1,16 +1,21 @@
 import {
+  CLEANUP_SEARCH_RESULT,
   SET_ADDONS_DIRECTORY,
   SET_ADDONS_LIST,
   SET_FETCH_STATE,
   SET_FAILED,
   SET_UPDATED,
   SET_FAILED_READ_ADDONS_STATE,
+  SET_SEARCH,
+  SET_SEARCH_RESULT,
   SET_UPDATE_PROCESS,
 } from '../actionTypes';
 
 import readAddons from '../helpers/read-addons.js';
+import searchAddonHelper from '../helpers/search-addon.js';
 import updateAddonHelper from '../helpers/update-addon.js';
 import chooseDirectoryHelper from '../helpers/directory-chooser.js';
+import debounce from '../helpers/debounce.js';
 
 const getSetDirectoryAction = path =>
   ({ type: SET_ADDONS_DIRECTORY, payload: { path } });
@@ -42,20 +47,20 @@ const updateCallback = (id, result, dispatch) => {
   dispatch(setUpdateProcess(false));
 };
 
-const updateAddonInner = (id, directory, dispatch) => {
-  dispatch(setFetchState(id, true));
+const updateAddonInner = (addon, directory, dispatch) => {
+  dispatch(setFetchState(addon.id, true));
   dispatch(setUpdateProcess(true));
-  return updateAddonHelper(id, directory).then(() => {
-    updateCallback(id, true, dispatch);
+  return updateAddonHelper(addon, directory).then(() => {
+    updateCallback(addon.id, true, dispatch);
   }).catch(() => {
-    updateCallback(id, false, dispatch);
+    updateCallback(addon.id, false, dispatch);
   });
 }
 
-export function updateAddon(id) {
+export function updateAddon(addon) {
   return (dispatch, getState) => {
     const { addons: { directory } } = getState();
-    updateAddonInner(id, directory, dispatch);
+    updateAddonInner(addon, directory, dispatch);
   };
 }
 
@@ -79,7 +84,7 @@ export function updateAll() {
     }} = getState();
     Promise.all(
       list.map(addon =>
-        updateAddonInner(addon.id, directory, dispatch)
+        updateAddonInner(addon, directory, dispatch)
       ))
       .then(() =>
         new Notification(`WOW Addons Updater`, {
@@ -99,5 +104,27 @@ export function chooseDirectory() {
         dispatch(setAddonsDirectory(res));
       })
       .catch(() => {});
+  };
+}
+
+const searchDebounced = debounce(function(dispatch, query) {
+  dispatch({ type: SET_SEARCH });
+  searchAddonHelper(query).then(res => {
+    dispatch({ type: SET_SEARCH_RESULT, payload: res });
+  });
+}, 1000);
+
+export function searchAddon(query) {
+  return dispatch => {
+    searchDebounced(dispatch, query);
+  };
+}
+
+export function installAddon(addon) {
+  return (dispatch, getState) => {
+    const { addons: { directory } } = getState();
+    dispatch({ type: CLEANUP_SEARCH_RESULT });
+    updateAddonInner(addon, directory, dispatch).then(() =>
+      dispatch(setAddonsDirectory(directory)));
   };
 }

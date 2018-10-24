@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "adm-zip": "0.4.11",
+    "cheerio": "^1.0.0-rc.2",
     "nanoid": "^1.2.3",
     "request": "2.87.0"
   }
