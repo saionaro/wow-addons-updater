@@ -1,23 +1,23 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-import AddonsTable from '../addons-table/index.jsx';
-import DirectoryInput from '../directory-input/index.jsx';
-import Search from '../search/index.jsx';
+import { StoreState as AddonsState } from '../../types/addons';
+import { StoreState as SearchState } from '../../types/search';
+import { AddonsTable } from '../addons-table';
+import { DirectoryInput } from '../directory-input';
+import { Search } from '../search';
 import './style.less';
 
-export default class App extends PureComponent {
-  static propTypes = {
-    installAddon: PropTypes.func.isRequired,
-    chooseDirectory: PropTypes.func.isRequired,
-    searchAddon: PropTypes.func.isRequired,
-    updateAddon: PropTypes.func.isRequired,
-    updateAll: PropTypes.func.isRequired,
+export interface AppProps {
+  installAddon: Function;
+  chooseDirectory: React.ReactEventHandler;
+  searchAddon: Function;
+  updateAddon: Function;
+  updateAll: React.ReactEventHandler;
+  addons: AddonsState;
+  search: SearchState;
+}
 
-    addons: PropTypes.shape(),
-    search: PropTypes.shape(),
-  };
-
+export class App extends React.PureComponent<AppProps> {
   render() {
     const {
       installAddon,
@@ -47,7 +47,7 @@ export default class App extends PureComponent {
           )}
         </div>
         <AddonsTable
-          {...addons}
+          data={addons}
           updateAddon={updateAddon}
           updateAll={updateAll}
         />

@@ -40,7 +40,9 @@ function getAddonsList(instance, event, data) {
         instance.window.webContents.send('answer/get-addons', {
           uuid,
           fail: false,
-          data: Object.keys(addons).sort(sorterer).map(transform),
+          data: {
+            addons: Object.keys(addons).sort(sorterer).map(transform),
+          },
         });
       }
     };

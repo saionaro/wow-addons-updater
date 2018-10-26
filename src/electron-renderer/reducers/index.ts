@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import addons from './addons.js';
-import search from './search.js';
+import addons from './addons';
+import search from './search';
 
 const addonsApp = combineReducers({
   addons,

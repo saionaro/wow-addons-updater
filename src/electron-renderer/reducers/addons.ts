@@ -7,8 +7,10 @@ import {
   SET_FAILED_READ_ADDONS_STATE,
   SET_UPDATE_PROCESS,
 } from '../actionTypes';
+import { StoreState } from '../types/addons';
+import { Action } from '../types/actions';
 
-const initial = {
+const initial:StoreState = {
   list: [],
   directory: '',
   fetching: {},
@@ -18,7 +20,7 @@ const initial = {
   updateProcess: false,
 };
 
-export default function(state = initial, action) {
+export default function(state:StoreState = initial, action:Action) {
 
   switch (action.type) {
 

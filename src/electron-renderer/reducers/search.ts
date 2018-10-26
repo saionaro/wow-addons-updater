@@ -3,14 +3,16 @@ import {
   SET_SEARCH,
   SET_SEARCH_RESULT,
 } from '../actionTypes';
+import { StoreState } from '../types/search';
+import { Action } from '../types/actions';
 
-const initial = {
+const initial:StoreState = {
   cache: {},
   pending: false,
   list: [],
 };
 
-export default function(state = initial, action) {
+export default function(state:StoreState = initial, action:Action) {
 
   switch (action.type) {
 
