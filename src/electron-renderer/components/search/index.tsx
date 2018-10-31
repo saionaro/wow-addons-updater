@@ -1,38 +1,37 @@
-import React, { Fragment, PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import { StoreState } from '../../types/search';
 
 import './style.less';
 
-export default class Search extends PureComponent {
-  static propTypes = {
-    data: PropTypes.shape({
-      cache: PropTypes.shape(),
-      list: PropTypes.arrayOf(PropTypes.string),
-      pending: PropTypes.bool.isRequired,
-    }),
-    searchAddon: PropTypes.func.isRequired,
-    onClickResult: PropTypes.func,
+export interface SearchProps {
+  data: StoreState;
+  searchAddon: Function;
+  onClickResult: Function;
+}
+
+interface State {
+  readonly query: string;
+}
+
+export class Search extends React.PureComponent<SearchProps, State> {
+  readonly state: State = {
+    query: '',
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      query: '',
-    };
-  }
-
-  handleChange = (event) => {
+  handleChange = (event:React.ChangeEvent) => {
+    const element = event.target as HTMLInputElement;
     this.setState({
-      query: event.target.value
+      query: element.value
     }, this.runSearch);
   }
 
-  handleItemClick = (event) => {
+  handleItemClick = (event:React.MouseEvent<HTMLLIElement>) => {
     const { onClickResult } = this.props;
+
     if (onClickResult) {
       const { data: { cache } } = this.props;
-      const key = event._targetInst.key;
+      const anyEvent = event as any;
+      const key = anyEvent._targetInst.key;
       const item = cache[key];
       onClickResult(item);
       this.setState({ query: '' });
@@ -45,7 +44,7 @@ export default class Search extends PureComponent {
     searchAddon(query);
   }
 
-  wrapSearch = (label) => {
+  wrapSearch = (label:string) => {
     const { query } = this.state;
     const queryIndex = label.toLowerCase().indexOf(query.toLowerCase());
     if (query && ~queryIndex) {
@@ -54,11 +53,11 @@ export default class Search extends PureComponent {
       const suffix = label.slice(queryIndex + query.length);
 
       return (
-        <Fragment>
+        <React.Fragment>
           {prefix}
           <strong>{findedQuery}</strong>
           {suffix}
-        </Fragment>
+        </React.Fragment>
       );
     }
     return label

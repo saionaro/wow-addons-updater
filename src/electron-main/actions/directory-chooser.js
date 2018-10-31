@@ -10,7 +10,9 @@ function chooseDirectory(instance, event, options) {
     instance.window.webContents.send('answer/choose-directory', {
       uuid,
       fail: false,
-      data: data[0]
+      data: {
+        directory: data[0],
+      },
     });
   } else {
     instance.window.webContents.send('answer/choose-directory', {

@@ -1,31 +1,27 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import cn from 'classnames';
 
-import Button from '../button/index.jsx';
+import { Button } from '../button';
+import { StoreState } from '../../types/addons';
 import './style.less';
 
-export default class AddonsTable extends PureComponent {
-  static propTypes = {
-    list: PropTypes.array.isRequired,
-    directory: PropTypes.string.isRequired,
-    fetching: PropTypes.object.isRequired,
-    failed: PropTypes.object.isRequired,
-    updated: PropTypes.object.isRequired,
-    updateAddon: PropTypes.func.isRequired,
-    updateAll: PropTypes.func.isRequired,
-    failedRead: PropTypes.bool.isRequired,
-    updateProcess: PropTypes.bool.isRequired,
-  };
+export interface AddonsTableProps {
+  data: StoreState;
+  updateAddon: Function;
+  updateAll: React.ReactEventHandler;
+}
 
-  _renderBody = () => {
+export class AddonsTable extends React.PureComponent<AddonsTableProps> {
+  private renderBody = () => {
     const {
-      list,
-      fetching,
-      failed,
-      updated,
+      data: {
+        list,
+        fetching,
+        failed,
+        updated,
+        updateProcess,
+      },
       updateAddon,
-      updateProcess,
     } = this.props;
     return (
       <div className="au-addons-table__body">
@@ -50,7 +46,7 @@ export default class AddonsTable extends PureComponent {
     );
   }
 
-  _renderReadError = () => {
+  private renderReadError = () => {
     return (
       <div className="au-addons-table__error">
         Error while reading directory!
@@ -60,10 +56,12 @@ export default class AddonsTable extends PureComponent {
 
   render() {
     const {
-      directory,
-      failedRead,
-      list,
-      updateProcess,
+      data: {
+        directory,
+        failedRead,
+        list,
+        updateProcess,
+      },
     } = this.props;
     return (
       <div className="au-addons-table">
@@ -75,7 +73,7 @@ export default class AddonsTable extends PureComponent {
             <div className="au-addons-table__current-title">
               {directory}
             </div>
-            {failedRead ? this._renderReadError() : this._renderBody()}
+            {failedRead ? this.renderReadError() : this.renderBody()}
             {!!list.length && (
               <Button
                 disabled={updateProcess}

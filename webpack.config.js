@@ -18,7 +18,7 @@ module.exports = {
     minimize: NODE_ENV === 'production',
   },
   entry: {
-    app: ['./src/electron-renderer/index.jsx']
+    app: ['./src/electron-renderer/index.tsx']
   },
   output: {
     path: __dirname + '/dist',
@@ -28,7 +28,7 @@ module.exports = {
     libraryTarget: 'var'
   },
   resolve: {
-    extensions: ['.js', '.less']
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.less']
   },
   plugins: [
     new CleanWebpackPlugin(pathsToClean, cleanOptions),
@@ -55,14 +55,15 @@ module.exports = {
         'less-loader'
       ],
     }, {
+      test: /\.tsx?$/,
+      use: ['awesome-typescript-loader'],
+    }, {
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       use: ['babel-loader'],
     }, {
       test: /\.svg$/,
-      use: [{
-        loader: 'svg-url-loader'
-      }]
+      use: ['svg-url-loader'],
     }]
   }
 };
