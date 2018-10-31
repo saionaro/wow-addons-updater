@@ -704,11 +704,11 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.0.tgz#50c1e2260ac0ed9439a181de3725a0168d59c48a"
 
-"@types/classnames@^2.2.6":
+"@types/classnames@2.2.6":
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/@types/classnames/-/classnames-2.2.6.tgz#dbe8a666156d556ed018e15a4c65f08937c3f628"
 
-"@types/nanoid@^1.2.0":
+"@types/nanoid@1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@types/nanoid/-/nanoid-1.2.0.tgz#c0141cfec5b4818016355389b0bd539097d872ff"
   dependencies:
@@ -726,28 +726,28 @@
   version "15.5.6"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.6.tgz#9c03d3fed70a8d517c191b7734da2879b50ca26c"
 
-"@types/react-dom@^16.0.9":
+"@types/react-dom@16.0.9":
   version "16.0.9"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.9.tgz#73ceb7abe6703822eab6600e65c5c52efd07fb91"
   dependencies:
     "@types/node" "*"
     "@types/react" "*"
 
-"@types/react-redux@^6.0.9":
+"@types/react-redux@6.0.9":
   version "6.0.9"
   resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-6.0.9.tgz#96aa7f5b0716bcc3bfb36ceaa1223118d509f79a"
   dependencies:
     "@types/react" "*"
     redux "^4.0.0"
 
-"@types/react@*", "@types/react@^16.4.18":
+"@types/react@*", "@types/react@16.4.18":
   version "16.4.18"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.18.tgz#2e28a2e7f92d3fa7d6a65f2b73275c3e3138a13d"
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/redux-logger@^3.0.6":
+"@types/redux-logger@3.0.6":
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/@types/redux-logger/-/redux-logger-3.0.6.tgz#4cf9d5b596b576b030a4bb671547f0ab63f81a73"
   dependencies:
@@ -1491,7 +1491,7 @@ chardet@^0.4.0:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.4.2.tgz#b5473b33dc97c424e5d98dc87d55d4d8a29c8bf2"
 
-cheerio@^1.0.0-rc.2:
+cheerio@1.0.0-rc.2:
   version "1.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/cheerio/-/cheerio-1.0.0-rc.2.tgz#4b9f53a81b27e4d5dac31c0ffd0cfa03cc6830db"
   dependencies:
@@ -4044,7 +4044,7 @@ nan@^2.9.2:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
 
-nanoid@^1.2.3:
+nanoid@1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-1.2.3.tgz#b8f022193a5808f9e3112658a2c34e43b24c009a"
 

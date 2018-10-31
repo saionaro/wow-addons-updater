@@ -56,15 +56,15 @@
     "webpack-cli": "3.1.2"
   },
   "dependencies": {
-    "@types/classnames": "^2.2.6",
-    "@types/nanoid": "^1.2.0",
-    "@types/react": "^16.4.18",
-    "@types/react-dom": "^16.0.9",
-    "@types/react-redux": "^6.0.9",
-    "@types/redux-logger": "^3.0.6",
+    "@types/classnames": "2.2.6",
+    "@types/nanoid": "1.2.0",
+    "@types/react": "16.4.18",
+    "@types/react-dom": "16.0.9",
+    "@types/react-redux": "6.0.9",
+    "@types/redux-logger": "3.0.6",
     "adm-zip": "0.4.11",
-    "cheerio": "^1.0.0-rc.2",
-    "nanoid": "^1.2.3",
+    "cheerio": "1.0.0-rc.2",
+    "nanoid": "1.2.3",
     "request": "2.87.0"
   }
 }
