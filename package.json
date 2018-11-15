@@ -62,7 +62,7 @@
     "@types/react-dom": "16.0.9",
     "@types/react-redux": "6.0.9",
     "@types/redux-logger": "3.0.6",
-    "adm-zip": "0.4.11",
+    "adm-zip": "0.4.13",
     "cheerio": "1.0.0-rc.2",
     "nanoid": "2.0.0",
     "request": "2.88.0"
