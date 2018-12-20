@@ -41,7 +41,7 @@
     "postcss-jsx": "0.35.0",
     "postcss-loader": "3.0.0",
     "postcss-syntax": "0.34.0",
-    "react": "16.6.3",
+    "react": "16.7.0",
     "react-dom": "16.6.3",
     "react-redux": "6.0.0",
     "redux": "4.0.1",
