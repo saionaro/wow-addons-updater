@@ -64,7 +64,7 @@
     "adm-zip": "0.4.13",
     "cheerio": "1.0.0-rc.2",
     "lodash": "4.17.11",
-    "nanoid": "2.0.0",
+    "nanoid": "2.0.1",
     "request": "2.88.0"
   }
 }
