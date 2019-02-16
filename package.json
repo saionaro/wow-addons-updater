@@ -56,7 +56,7 @@
     "@types/classnames": "2.2.6",
     "@types/nanoid": "1.2.0",
     "@types/react": "16.7.10",
-    "@types/react-dom": "16.0.11",
+    "@types/react-dom": "16.8.2",
     "@types/react-redux": "6.0.10",
     "@types/redux-logger": "3.0.6"
   },
