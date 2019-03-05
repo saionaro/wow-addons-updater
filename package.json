@@ -29,7 +29,7 @@
     "copy-webpack-plugin": "4.6.0",
     "cross-env": "5.2.0",
     "css-loader": "2.1.0",
-    "electron": "4.0.6",
+    "electron": "4.0.7",
     "electron-packager": "13.1.0",
     "eslint": "5.15.0",
     "eslint-loader": "2.1.1",
