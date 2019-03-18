@@ -836,6 +836,13 @@
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/@types/classnames/-/classnames-2.2.6.tgz#dbe8a666156d556ed018e15a4c65f08937c3f628"
 
+"@types/hoist-non-react-statics@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz#a59c0c995cc885bef1b8ec2241b114f9b35b517b"
+  integrity sha512-O2OGyW9wlO2bbDmZRH17MecArQfsIa1g//ve2IJk6BnmwEglFz5kdhP1BlgeqjVNH5IHIhsc83DWFo8StCe8+Q==
+  dependencies:
+    "@types/react" "*"
+
 "@types/nanoid@1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@types/nanoid/-/nanoid-1.2.1.tgz#995bd0538ef04c4751d88d2fa15a97f0b85dd848"
@@ -862,10 +869,12 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-redux@6.0.10":
-  version "6.0.10"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-6.0.10.tgz#80a3003a7d50112c65692a8b41752f623217a17c"
+"@types/react-redux@7.0.5":
+  version "7.0.5"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.0.5.tgz#4d284f8565cd9f7316086cce50e87f3d201d0880"
+  integrity sha512-O0WyoSbrMofJRxtSDe8qYhnmr2SSlTnshlQdnpgpD763L8BzlhXuEseksV7LSoCUwZ7vN4YqpQThl3jp02sceQ==
   dependencies:
+    "@types/hoist-non-react-statics" "^3.3.0"
     "@types/react" "*"
     redux "^4.0.0"
 
