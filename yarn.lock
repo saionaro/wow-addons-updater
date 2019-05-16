@@ -4195,9 +4195,10 @@ nan@^2.9.2:
   version "2.11.1"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.11.1.tgz#90e22bccb8ca57ea4cd37cc83d3819b52eea6766"
 
-nanoid@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-2.0.1.tgz#deb55cac196e3f138071911dabbc3726eb048864"
+nanoid@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-2.0.2.tgz#2163edc84828cd42f9b8e4578979a4b5ffc1bb18"
+  integrity sha512-X4yQ8VHoFvHcykGunT2Jxrsm1c4vH5UKtau7LLJYXO1istCRE3jD8JxDyGCzN+h7dpWBCvWaSYgloRuphKRqUQ==
 
 nanomatch@^1.2.9:
   version "1.2.13"
