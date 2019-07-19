@@ -20,7 +20,10 @@ const inst = {
 const createWindow = (x, y) => new BrowserWindow({
   width: x,
   height: y,
-  titleBarStyle: 'hiddenInset'
+  titleBarStyle: 'hiddenInset',
+  webPreferences: {
+    nodeIntegration: true
+  }
 });
 
 app.on('window-all-closed', function() {
