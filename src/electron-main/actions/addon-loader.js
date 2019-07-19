@@ -1,10 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 const request = require('request');
+const cheerio = require('cheerio');
 const AdmZip = require('adm-zip');
 
-const log = require('../utils/logger.js');
+const PREFIX = "https://www.curseforge.com";
 
+const log = require('../utils/logger.js');
+// https://www.curseforge.com/wow/addons/aptechka/files
 const removeFile = path =>
   new Promise((res, rej) => {
     fs.unlink(path, err => {
@@ -40,26 +43,47 @@ const downloadFile = (title, url, tempPath) => {
   });
 };
 
-const isZipUrl = res =>
-  /zip$/.test(res.request.uri.href);
-
-const getZipUrl = url =>
-  new Promise((res, rej) => {
-    log(`Fetching ${url}`);
-    request(url, (err, response) => {
-      if (err || !isZipUrl(response)) {
-        log('Make error');
-        return rej(err || new Error('Unknown error.'));
+const getZipUrl = url => {
+  return new Promise((res, rej) => {
+    request(url, (err, response, body) => {
+      if (err) {
+        return rej(err);
       }
-      res(response.request.uri.href);
+
+      const bodyContent = cheerio.load(body);
+      const rows = bodyContent('.listing-project-file tr');
+
+      const needsRow = Array.prototype.find.call(rows, (item) => {
+        const rowContent = cheerio.load(item);
+        const tds = rowContent('td');
+  
+        const versionType = tds.eq(0).text().trim();
+  
+        if (versionType !== "R") {
+          return false;
+        }
+  
+        const gameVersion = tds.eq(4).text().trim();
+  
+        if (parseInt(gameVersion, 10) < 8) {
+          return false;
+        }
+  
+        return true;
+      });
+
+      const needsRowContent = cheerio.load(needsRow);
+      const td = needsRowContent('td').last()
+      const tdContent = cheerio.load(td.html());
+      const url = tdContent("a").eq(0).attr('href').trim();
+
+      res(`${PREFIX}${url}/file`);
     });
   });
+};
 
 const buildCurseUrl = title =>
-  `https://wow.curseforge.com/projects/${title}/files/latest`;
-
-const buildAceUrl = title =>
-  `https://www.wowace.com/projects/${title}/files/latest`;
+  `https://www.curseforge.com/wow/addons/${title}/files`;
 
 function loadAddon(instance, event, data) {
   const {
@@ -72,12 +96,11 @@ function loadAddon(instance, event, data) {
     uuid,
   } = data;
   log('Get data for ' + title);
+
   getZipUrl(archiveUrl || buildCurseUrl(addonToken || title))
-    .catch(() => {
-      log('Second try');
-      return getZipUrl(buildAceUrl(addonToken || title));
-    })
     .then(url => {
+
+
       return downloadFile(title, url, instance.tempPath);
     })
     .then(path => {
