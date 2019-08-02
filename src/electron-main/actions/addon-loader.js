@@ -2,12 +2,12 @@ const fs = require('fs');
 const path = require('path');
 const request = require('request');
 const cheerio = require('cheerio');
-const AdmZip = require('adm-zip');
+const extract = require('extract-zip');
 
 const PREFIX = "https://www.curseforge.com";
 
 const log = require('../utils/logger.js');
-// https://www.curseforge.com/wow/addons/aptechka/files
+
 const removeFile = path =>
   new Promise((res, rej) => {
     fs.unlink(path, err => {
@@ -20,20 +20,21 @@ const removeFile = path =>
 
 const unzip = (path, destination) =>
   new Promise((res, rej) => {
-    new AdmZip(path)
-      .extractAllToAsync(destination, true, err => {
-        if (err) {
-          return rej(err);
-        }
-        removeFile(path)
-          .then(res)
-          .catch(rej);
-      });
+    extract(path, {dir: destination}, function (err) {
+      if (err) {
+        return rej(err);
+      }
+
+      removeFile(path)
+        .then(res)
+        .catch(rej);
+    });
   });
 
 const downloadFile = (title, url, tempPath) => {
   log(`Download ${url}`);
   const zipPath = path.join(tempPath, `${title}.zip`);
+
   return new Promise(res => {
     request(url)
       .pipe(fs.createWriteStream(zipPath))
@@ -72,12 +73,17 @@ const getZipUrl = url => {
         return true;
       });
 
-      const needsRowContent = cheerio.load(needsRow);
-      const td = needsRowContent('td').last()
-      const tdContent = cheerio.load(td.html());
-      const url = tdContent("a").eq(0).attr('href').trim();
+      try {
+        const needsRowContent = cheerio.load(needsRow);
+        const td = needsRowContent('td').last()
+        const tdContent = cheerio.load(td.html());
+        const url = tdContent("a").eq(0).attr('href').trim();
+  
+        res(`${PREFIX}${url}/file`);
+      } catch(e) {
+        rej(e);
+      }
 
-      res(`${PREFIX}${url}/file`);
     });
   });
 };
@@ -99,8 +105,6 @@ function loadAddon(instance, event, data) {
 
   getZipUrl(archiveUrl || buildCurseUrl(addonToken || title))
     .then(url => {
-
-
       return downloadFile(title, url, instance.tempPath);
     })
     .then(path => {
