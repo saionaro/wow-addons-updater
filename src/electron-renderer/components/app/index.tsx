@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { Button } from '../button';
 import { StoreState as AddonsState } from '../../types/addons';
 import { StoreState as SearchState } from '../../types/search';
 import { AddonsTable } from '../addons-table';
@@ -29,6 +30,7 @@ export class App extends React.PureComponent<AppProps> {
       addons,
       addons: {
         directory,
+        updateProcess
       },
     } = this.props;
 
@@ -37,6 +39,12 @@ export class App extends React.PureComponent<AppProps> {
         <div className="au-app__row">
           <DirectoryInput
             chooseDirectory={chooseDirectory}
+          />
+          <Button
+            disabled={updateProcess || !addons.list.length}
+            className="au-app__update-button"
+            caption="Update All"
+            onClick={updateAll}
           />
           {directory && (
             <Search
@@ -49,7 +57,6 @@ export class App extends React.PureComponent<AppProps> {
         <AddonsTable
           data={addons}
           updateAddon={updateAddon}
-          updateAll={updateAll}
         />
       </div>
     );

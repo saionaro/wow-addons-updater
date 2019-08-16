@@ -1,14 +1,12 @@
 import * as React from 'react';
 import cn from 'classnames';
 
-import { Button } from '../button';
 import { StoreState } from '../../types/addons';
 import './style.less';
 
 export interface AddonsTableProps {
   data: StoreState;
   updateAddon: Function;
-  updateAll: React.ReactEventHandler;
 }
 
 export class AddonsTable extends React.PureComponent<AddonsTableProps> {
@@ -37,7 +35,6 @@ export class AddonsTable extends React.PureComponent<AddonsTableProps> {
               key={addon.id}
               onClick={() => { !updateProcess && updateAddon(addon) }}
             >
-              <span className="au-addons-table__icon"></span>
               {addon.title}
             </div>
           );
@@ -74,14 +71,6 @@ export class AddonsTable extends React.PureComponent<AddonsTableProps> {
               {directory}
             </div>
             {failedRead ? this.renderReadError() : this.renderBody()}
-            {!!list.length && (
-              <Button
-                disabled={updateProcess}
-                className="au-addons-table__update-button"
-                caption="Update All"
-                onClick={this.props.updateAll}
-              />
-            )}
           </div>
         </div>
       </div>
