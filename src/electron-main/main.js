@@ -34,7 +34,6 @@ app.on("ready", () => {
 
   inst.window.removeMenu();
   app.dock.hide();
-  // inst.window.setMenuBarVisibility(false);
 
   if (DEV) {
     inst.window.webContents.openDevTools();
