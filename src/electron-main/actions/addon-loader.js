@@ -1,12 +1,30 @@
-const fs = require('fs');
-const path = require('path');
-const request = require('request');
-const cheerio = require('cheerio');
-const extract = require('extract-zip');
+const fs = require("fs");
+const path = require("path");
+const request = require("request");
+const cheerio = require("cheerio");
+const extract = require("extract-zip");
+const UserAgent = require("user-agents");
 
 const PREFIX = "https://www.curseforge.com";
 
-const log = require('../utils/logger.js');
+const generateAgent = new UserAgent({ platform: "Win32" });
+
+const FAKE_HEADERS = {
+  authority: "www.curseforge.com",
+  method: "GET",
+  accept: "text/html,application/xhtml+xml,application/xml;",
+  "accept-language": "en-US,en;"
+};
+
+const log = require("../utils/logger.js");
+
+const getConfig = url => ({
+  url,
+  headers: {
+    ...FAKE_HEADERS,
+    "user-agent": generateAgent()
+  }
+});
 
 const removeFile = path =>
   new Promise((res, rej) => {
@@ -20,7 +38,7 @@ const removeFile = path =>
 
 const unzip = (path, destination) =>
   new Promise((res, rej) => {
-    extract(path, {dir: destination}, function (err) {
+    extract(path, { dir: destination }, function(err) {
       if (err) {
         return rej(err);
       }
@@ -36,9 +54,9 @@ const downloadFile = (title, url, tempPath) => {
   const zipPath = path.join(tempPath, `${title}.zip`);
 
   return new Promise(res => {
-    request(url)
+    request(getConfig(url))
       .pipe(fs.createWriteStream(zipPath))
-      .on('finish', () => {
+      .on("finish", () => {
         res(zipPath);
       });
   });
@@ -46,44 +64,52 @@ const downloadFile = (title, url, tempPath) => {
 
 const getZipUrl = url => {
   return new Promise((res, rej) => {
-    request(url, (err, response, body) => {
+    request(getConfig(url), (err, _response, body) => {
       if (err) {
         return rej(err);
       }
 
       const bodyContent = cheerio.load(body);
-      const rows = bodyContent('.listing-project-file tr');
+      const rows = bodyContent(".listing-project-file tr");
 
-      const needsRow = Array.prototype.find.call(rows, (item) => {
+      const needsRow = Array.prototype.find.call(rows, item => {
         const rowContent = cheerio.load(item);
-        const tds = rowContent('td');
-  
-        const versionType = tds.eq(0).text().trim();
-  
+        const tds = rowContent("td");
+
+        const versionType = tds
+          .eq(0)
+          .text()
+          .trim();
+
         if (versionType !== "R") {
           return false;
         }
-  
-        const gameVersion = tds.eq(4).text().trim();
-  
+
+        const gameVersion = tds
+          .eq(4)
+          .text()
+          .trim();
+
         if (parseInt(gameVersion, 10) < 8) {
           return false;
         }
-  
+
         return true;
       });
 
       try {
         const needsRowContent = cheerio.load(needsRow);
-        const td = needsRowContent('td').last()
+        const td = needsRowContent("td").last();
         const tdContent = cheerio.load(td.html());
-        const url = tdContent("a").eq(0).attr('href').trim();
-  
+        const url = tdContent("a")
+          .eq(0)
+          .attr("href")
+          .trim();
+
         res(`${PREFIX}${url}/file`);
-      } catch(e) {
+      } catch (e) {
         rej(e);
       }
-
     });
   });
 };
@@ -93,15 +119,11 @@ const buildCurseUrl = title =>
 
 function loadAddon(instance, event, data) {
   const {
-    addonData: {
-      title,
-      archiveUrl,
-      addonToken,
-    },
+    addonData: { title, archiveUrl, addonToken },
     addonsDirectory,
-    uuid,
+    uuid
   } = data;
-  log('Get data for ' + title);
+  log("Get data for " + title);
 
   getZipUrl(archiveUrl || buildCurseUrl(addonToken || title))
     .then(url => {
@@ -111,21 +133,21 @@ function loadAddon(instance, event, data) {
       return unzip(path, addonsDirectory);
     })
     .then(() => {
-      log('Done');
-      instance.window.webContents.send('answer/get-addon-data', {
+      log("Done");
+      instance.window.webContents.send("answer/get-addon-data", {
         uuid,
         fail: false,
         data: {}
       });
     })
     .catch(err => {
-      log('Caused error', err);
-      instance.window.webContents.send('answer/get-addon-data', {
+      log("Caused error", err);
+      instance.window.webContents.send("answer/get-addon-data", {
         uuid,
         fail: true,
         error: err
       });
-    })
+    });
 }
 
 module.exports = function(instance) {

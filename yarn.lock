@@ -2384,6 +2384,11 @@ dir-glob@^2.2.2:
   dependencies:
     path-type "^3.0.0"
 
+docopt@~0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/docopt/-/docopt-0.6.2.tgz#b28e9e2220da5ec49f7ea5bb24a47787405eeb11"
+  integrity sha1-so6eIiDaXsSffqW7JKR3h0Be6xE=
+
 doctrine@1.5.0:
   version "1.5.0"
   resolved "http://registry.npmjs.org/doctrine/-/doctrine-1.5.0.tgz#379dce730f6166f76cefa4e6707a159b02c5a6fa"
@@ -2452,6 +2457,14 @@ domutils@^1.5.1:
   dependencies:
     dom-serializer "0"
     domelementtype "1"
+
+dot-json@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/dot-json/-/dot-json-1.1.0.tgz#36dc7d40c00afaef2823b715b94325ba39f1bd89"
+  integrity sha512-PiQZW9/C8xILPYK2bOye/cbPZrakNEkt28jFb8RlPCwsoMAHYYw9T8JoACxgttHL9Y2AmdqVvibbZJHtLgeqTQ==
+  dependencies:
+    docopt "~0.6.2"
+    underscore-keypath "~0.0.22"
 
 dot-prop@^4.1.1:
   version "4.2.0"
@@ -4133,6 +4146,11 @@ locate-path@^3.0.0:
 lodash-es@^4.2.1:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.11.tgz#145ab4a7ac5c5e52a3531fb4f310255a152b4be0"
+
+lodash.clonedeep@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
+  integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
 
 lodash.debounce@^4.0.8:
   version "4.0.8"
@@ -6481,6 +6499,18 @@ typescript@3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.2.1.tgz#0b7a04b8cf3868188de914d9568bd030f0c56192"
 
+underscore-keypath@~0.0.22:
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/underscore-keypath/-/underscore-keypath-0.0.22.tgz#48a528392bb6efc424be1caa56da4b5faccf264d"
+  integrity sha1-SKUoOSu278QkvhyqVtpLX6zPJk0=
+  dependencies:
+    underscore "*"
+
+underscore@*:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.9.1.tgz#06dce34a0e68a7babc29b365b8e74b8925203961"
+  integrity sha512-5/4etnCkd9c8gwgowi5/om/mYO5ajCaOgdzj/oW+0eQV9WxKBDZw5+ycmKmeaTXjInS/W0BzpGLo2xR2aBwZdg==
+
 unherit@^1.0.4:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/unherit/-/unherit-1.1.1.tgz#132748da3e88eab767e08fabfbb89c5e9d28628c"
@@ -6623,6 +6653,14 @@ url@^0.11.0:
 use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
+
+user-agents@^1.0.390:
+  version "1.0.390"
+  resolved "https://registry.yarnpkg.com/user-agents/-/user-agents-1.0.390.tgz#671077dbc2f8044df6c07e28d37b4a6e18245f2c"
+  integrity sha512-mJzoAAVvTy6TPgd0ytnYxu8oV/JSUUDjl9Ocn97fD2elcwCMCcA2U3P+mwij3iO0ziIz6RJisu6yzlqM7Qy41A==
+  dependencies:
+    dot-json "^1.1.0"
+    lodash.clonedeep "^4.5.0"
 
 utf8-byte-length@^1.0.1:
   version "1.0.4"
