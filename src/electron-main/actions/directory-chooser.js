@@ -4,9 +4,13 @@ async function chooseDirectory(instance, event, options) {
   const { uuid } = options;
 
   try {
-    const { filePaths: data } = await dialog.showOpenDialog({
+    let data = await dialog.showOpenDialog({
       properties: ["openDirectory"]
     });
+
+    if (data.filePaths) {
+      data = data.filePaths;
+    }
 
     if (data && data[0]) {
       instance.window.webContents.send("answer/choose-directory", {
