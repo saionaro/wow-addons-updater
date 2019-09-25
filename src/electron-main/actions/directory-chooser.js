@@ -1,25 +1,30 @@
-const { dialog } = require('electron');
+const { dialog } = require("electron");
 
-function chooseDirectory(instance, event, options) {
+async function chooseDirectory(instance, event, options) {
   const { uuid } = options;
-  const data = dialog.showOpenDialog({
-    properties: ['openDirectory']
-  });
 
-  if (data && data[0]) {
-    instance.window.webContents.send('answer/choose-directory', {
-      uuid,
-      fail: false,
-      data: {
-        directory: data[0],
-      },
+  try {
+    const { filePaths: data } = await dialog.showOpenDialog({
+      properties: ["openDirectory"]
     });
-  } else {
-    instance.window.webContents.send('answer/choose-directory', {
-      uuid,
-      fail: true,
-      error: new Error()
-    });
+
+    if (data && data[0]) {
+      instance.window.webContents.send("answer/choose-directory", {
+        uuid,
+        fail: false,
+        data: {
+          directory: data[0]
+        }
+      });
+    } else {
+      instance.window.webContents.send("answer/choose-directory", {
+        uuid,
+        fail: true,
+        error: new Error()
+      });
+    }
+  } catch (e) {
+    console.log(e);
   }
 }
 
