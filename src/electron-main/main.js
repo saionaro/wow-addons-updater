@@ -33,7 +33,10 @@ app.on("ready", () => {
   inst.window.loadFile("./dist/index.html");
 
   inst.window.removeMenu();
-  app.dock.hide();
+
+  if (app.dock) {
+    app.dock.hide();
+  }
 
   if (DEV) {
     inst.window.webContents.openDevTools();
