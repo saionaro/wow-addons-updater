@@ -58,7 +58,7 @@
     "svg-url-loader": "3.0.0",
     "typescript": "3.2.1",
     "webpack": "4.35.0",
-    "webpack-cli": "3.3.2"
+    "webpack-cli": "3.3.10"
   },
   "dependencies": {
     "cheerio": "1.0.0-rc.3",
